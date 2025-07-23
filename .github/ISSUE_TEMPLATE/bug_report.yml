@@ -1,0 +1,46 @@
+name: Bug report
+description: Reporta un error o problema
+title: "[BUG]"
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar un error. Por favor completa la siguiente información:
+  - type: input
+    id: bug_description
+    attributes:
+      label: Describe el bug
+      placeholder: Describe el problema detalladamente
+    validations:
+      required: true
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Pasos para reproducirlo
+      description: Enumera los pasos para reproducir el error
+      placeholder: Paso 1, Paso 2, ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Comportamiento esperado
+      placeholder: ¿Qué debería pasar?
+    validations:
+      required: true
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Comportamiento actual
+      placeholder: ¿Qué pasa realmente?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Entorno (SO, versión, etc.)
+      placeholder: Ejemplo: Windows 10, Python 3.10
+    validations:
+      required: false
