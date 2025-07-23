@@ -1,0 +1,7 @@
+#modularizacion cache 
+*__pycache__/
+*.pyc
+
+#archivos
+caras.py
+main_copy.py
