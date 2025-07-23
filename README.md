@@ -32,12 +32,12 @@
   <a href="https://github.com/ZomboySoul/fnaf_signal_lost/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml" target="_blank" rel="noopener noreferrer">Report Bug</a>
 </p>
 <p align="center">
-  <a href="/docs/readme_fr.md">Français</a> ·  
-  <a href="/docs/readme_cn.md">简体中文</a> ·
-  <a href="/docs/readme_es.md">Español</a> ·
-  <a href="/docs/readme_ja.md">日本語</a> ·
-  <a href="/docs/readme_pt-BR.md">Português Brasileiro</a> ·
-  <a href="/docs/readme_it.md">Italiano</a>
+  <a href="./docs/readme_fr.md">Français</a> ·  
+  <a href="./docs/readme_cn.md">简体中文</a> ·
+  <a href="./docs/readme_es.md">Español</a> ·
+  <a href="./docs/readme_ja.md">日本語</a> ·
+  <a href="./docs/readme_pt-BR.md">Português Brasileiro</a> ·
+  <a href="./docs/readme_it.md">Italiano</a>
 </p>
 
 <br>
