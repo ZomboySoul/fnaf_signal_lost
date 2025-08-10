@@ -1,12 +1,15 @@
-from threading import Lock
+import warnings
+import os
 
-from threading import Event
+warnings.filterwarnings("ignore", category=UserWarning)
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+from threading import Event, Lock
 stop_event = Event()
 
 import pygame
 pygame.init()
 
-import os
 
 # Ruta base absoluta del proyecto (carpeta raíz)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -26,6 +29,7 @@ config = {
     "energia_uso_linterna": 0,
     "energia_uso_camara": 0,
     "tiempo_avanzar_hora": 0,
+    "dificulta": "",
 
     # Rutas de carpetas
     "carpeta_sonidos": os.path.join(BASE_DIR, "sound"),
@@ -36,12 +40,8 @@ config = {
     "sonido_victoria": "victoria_time.mp3",
     "sonido_jumpscare": "jumpscare.mp3",
     "sonido_camara": "camara_sound.mp3",
+    "intro" : "intro.wav",
 
-    # Parámetros de AI
-    "tiempo_movimiento_freddy": 45,
-    "tiempo_movimiento_foxy": 15,
-    "tiempo_movimiento_chica": 12,
-    "tiempo_movimiento_bonnie": 13
 }
 
 # LOCKS
@@ -64,5 +64,8 @@ habitaciones = {
     8: "Oficina"
 }
 
-canal_pasos = pygame.mixer.Channel(1)
-canal_interface = pygame.mixer.Channel(2)
+canal_interface = pygame.mixer.Channel(1)      
+canal_pasos_freddy = pygame.mixer.Channel(2)
+canal_pasos_bonnie = pygame.mixer.Channel(3)
+canal_pasos_chica = pygame.mixer.Channel(4)
+canal_pasos_foxy = pygame.mixer.Channel(5)
