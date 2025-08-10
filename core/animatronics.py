@@ -19,7 +19,7 @@ class Animatronico:
         self.rutas = rutas
         self.pasos_sonido = pasos_sonido
         self.cancion_muerte = cancion_muerte
-        self.cara = cara,
+        self.cara = cara
         self.canal_pasos = canal_pasos  
         self.acelerado = False
 
@@ -35,7 +35,7 @@ class Animatronico:
             return
 
         # Freddy no se mueve antes de las 3AM
-        if self.nombre == "Freddy" and estado.hora_actual < 3:
+        if self.nombre == "Freddy" and estado.hora_actual < 5:
             return
 
         if self.nombre == "Freddy":
