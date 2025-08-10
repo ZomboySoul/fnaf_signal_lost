@@ -45,9 +45,9 @@ def mover_animatronico(nombre):
                 break
             
             # Freddy no intenta moverse antes de las 3 AM
-            if anim.nombre == "Freddy" and estado.hora_actual < 3:
+            if anim.nombre == "Freddy" and estado.hora_actual < 5:
                 continue
-            
+
             # IA decide si mueve
             if random.randint(1, 20) <= anim.ia_level:
                 anim.mover()                   
