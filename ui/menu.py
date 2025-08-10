@@ -57,7 +57,7 @@ def menu_principal():
               ██╔══╝   ██║╚██╗██║ ██╔══██║ ██╔══╝  
               ██║      ██║ ╚████║ ██║  ██║ ██║     
               ╚═╝      ╚═╝  ╚═══╝ ╚═╝  ╚═╝ ╚═╝                               
-                         CMD NIGHT GAME      
+                           SIGNAL LOST      
         """)
          # Opciones
         for i, opcion in enumerate(opciones):
