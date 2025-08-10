@@ -3,11 +3,12 @@ from core.energy import barra_energia
 import core.config as estado
 from core.animatronics import animatronics
 from utils.utils import reproducir_sonido, cargar_plantilla_archivo
-from core.movement import detener_todos_los_canales
+from core.movement import detener_todos_los_canales, mover_animatronico
 
 from colorama import Fore, init, Style
 init(autoreset=True)
 
+from threading import Thread
 
 import msvcrt
 import time
@@ -95,8 +96,11 @@ def mapa_interactivo():
     camara_seleccionada = camaras_disponibles[indice]
     ultimo_refresco = time.time()
 
+    #mostrar mapa
+    mostrar_mapa(camara_seleccionada)
+
     while not estado.stop_event.is_set():
-        if time.time() - ultimo_refresco >= 1:
+        if time.time() - ultimo_refresco >= estado.config["tiempo_avanzar_hora"]:
             mostrar_mapa(camara_seleccionada)
             ultimo_refresco = time.time()
 
@@ -112,6 +116,7 @@ def mapa_interactivo():
                 elif flecha in [b'P', b'K']:
                     indice = (indice - 1) % len(camaras_disponibles)
                 camara_seleccionada = camaras_disponibles[indice]
+                mostrar_mapa(camara_seleccionada)
 
             elif tecla == b'\r':
                 if estado.energia_actual <= 0:
@@ -120,6 +125,9 @@ def mapa_interactivo():
                     time.sleep(1.5)
                 else:
                     mostrar_habitacion(camara_seleccionada)
+                    if not estado.stop_event.is_set():
+                        mostrar_mapa(camara_seleccionada)
+
                 if estado.stop_event.is_set():
                     break
 
@@ -127,6 +135,7 @@ def mapa_interactivo():
                 estado.stop_event.set()
                 print("Saliendo del juego...")
                 time.sleep(2)
+                detener_todos_los_canales()
                 limpiar_pantalla()
                 break
 
@@ -376,6 +385,21 @@ def mostrar_historia():
         time.sleep(0.5)
 
 
+def intro():
+    """
+    Reproudce una inroduccion de audio mientras el jugador puede interactuar,
+    pero los animatronicos no se mueven hasta que el audio termine
+    """
+
+    reproducir_sonido(estado.config["intro"])
+
+    while pygame.mixer.music.get_busy():
+        time.sleep(0.1)
+
+    # Cuando termina el audio, iniciar el hilo de movimiento
+    for nombre in animatronics:
+        Thread(target=mover_animatronico, args=(nombre,), daemon=True).start()
+
 def mostrar_instrucciones():
     
     """
@@ -478,14 +502,17 @@ def seleccionar_dificultad():
                 estado.config["tiempo_avanzar_hora"] = 60
                 estado.config["energia_uso_linterna"] = 5
                 estado.config["energia_uso_camara"] = 2
+                estado.config["dificultad"] = "NORMAL"
             elif seleccion == 1:
                 estado.config["tiempo_avanzar_hora"] = 120
                 estado.config["energia_uso_linterna"] = 3
                 estado.config["energia_uso_camara"] = 1.5
+                estado.config["dificultad"] = "DIFICIL"
             elif seleccion == 2:
                 estado.config["tiempo_avanzar_hora"] = 225
                 estado.config["energia_uso_linterna"] = 2
                 estado.config["energia_uso_camara"] = 1
+                estado.config["dificultad"] = "PESADILLA"
             elif seleccion == 3:
                 from main import menu_principal
                 menu_principal()
