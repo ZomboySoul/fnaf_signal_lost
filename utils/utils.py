@@ -1,6 +1,11 @@
+import warnings
+import sys, os
+
+warnings.filterwarnings("ignore", category=UserWarning)
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 import core.config  as estado
 
-import sys, os
 import pygame
 pygame.init()
 
