@@ -3,7 +3,7 @@ from core.timers import avanzar_hora
 from core.energy import verificar_energia
 from core.animatronics import animatronics
 from core.movement import mover_animatronico
-from ui.screens import mapa_interactivo, pantalla_game_over, seleccionar_dificultad, mostrar_historia
+from ui.screens import mapa_interactivo, pantalla_game_over, seleccionar_dificultad, intro
 from utils.utils import limpiar_pantalla
 
 from colorama import init, Fore, Style
@@ -11,8 +11,6 @@ init(autoreset=True)
 
 from threading import Thread
 
-
-import time
 
 def juego():
     """
@@ -36,13 +34,9 @@ def juego():
         - `stop_event` centraliza ahora la gestión del ciclo de vida de todos los hilos y bucles del juego.
     """
 
-    for nombre in animatronics:
-        Thread(target=mover_animatronico, args=(nombre,), daemon=True).start()
-
     Thread(target=verificar_energia, daemon=True).start()
-
-    hora_thread = Thread(target=avanzar_hora, daemon=True)
-    hora_thread.start()
+    Thread(target=avanzar_hora, daemon=True).start()
+    Thread(target=intro, daemon=True).start()
 
     while not estado.stop_event.is_set():
         limpiar_pantalla()
@@ -97,19 +91,16 @@ def iniciar_juego():
     
     for nombre, anim in animatronics.items():
         anim.posicion = anim.spawn
-        anim.tiempo_movimiento = estado.config[f"tiempo_movimiento_{nombre.lower()}"]
         anim.acelerado = False
+    
+        if estado.config["dificultad"] == "NORMAL":
+            anim.ia_level = max(1, anim.ia_level - 4) # Menos agresivo
+        elif estado.config["dificultad"] == "DIFICIL":
+            anim.ia_level = anim.ia_level # Base
+        elif estado.config["dificultad"] == "PESADILLA":
+            anim.ia_level = max(20, anim.ia_level + 5) # Mas agresivo
 
-    mostrar_historia()
-    time.sleep(3.5)
-    
-    limpiar_pantalla()
-    print(Fore.CYAN + Style.BRIGHT + "\nINICIANDO NOCHE", end="")
-    for _ in range(5):
-        time.sleep(0.5)
-        print(Fore.CYAN + Style.BRIGHT + ".", end="", flush=True)
-    limpiar_pantalla()
-    
+    limpiar_pantalla()    
     juego()
 
 
