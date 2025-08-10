@@ -7,6 +7,7 @@ from colorama import Fore, init, Style
 init(autoreset=True)
 
 import time
+import random
 
 def avanzar_hora():
 
@@ -61,14 +62,12 @@ def ajustar_tiempos_por_hora(hora_actual):
             hora_actual (int): Hora actual del juego.
     """
 
-    if hora_actual >= 4:
+    if hora_actual >= 6: # siendo las 4AM 
         for nombre, anim in animatronics.items():
             # Si no está ya acelerado (para no repetir)
             if not anim.acelerado:
                 # Reducir tiempo en un 60%
-                nuevo_tiempo = int(anim.tiempo_movimiento * 0.6)
-                # Evitar que se vuelva 0
-                anim.tiempo_movimiento = max(5, nuevo_tiempo)
+                nuevo_tiempo = int(anim.ia_level + random(1, 5))
                 # Marcamos que ya se aceleró
                 anim.acelerado = True
 
