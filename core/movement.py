@@ -1,11 +1,18 @@
+"""
+movement.py
+
+Gestiona el movimiento de los animatrónicos y la detención de canales de sonido
+en el juego.
+"""
+
+import random
+
 from core.animatronics import animatronics
 import core.config as estado
 from utils.utils import reproducir_sonido
 
-import random 
 
 def mover_animatronico(nombre):
-
     """
     Ejecuta el movimiento de un animatrónico en un hilo independiente.
 
@@ -18,17 +25,18 @@ def mover_animatronico(nombre):
     entre hilos mediante `movimiento_lock` y `muerte_lock`.
 
     Args:
-        nombre (str): Nombre clave del animatrónico en el diccionario `animatronics`.
+        nombre (str): Nombre clave del animatrónico en el diccionario
+                      `animatronics`.
 
     Notas:
-        - Usar en un hilo separado por animatrónico.
-        - `stop_event.wait(tiempo)` permite interrumpir la espera al finalizar el juego.
+        - Se debe ejecutar en un hilo separado por animatrónico.
+        - `stop_event.wait(tiempo)` permite interrumpir la espera si el juego
+          termina antes del tiempo definido.
     """
-
     anim = animatronics[nombre]
 
     while not estado.stop_event.is_set():
-        # Espera Aleatoria dependiendo del valor del animatronico 
+        # Espera aleatoria según el animatrónico
         tiempo_espera = random.uniform(anim.intervalo_min, anim.intervalo_max)
         if estado.stop_event.wait(tiempo_espera):
             break
@@ -40,25 +48,23 @@ def mover_animatronico(nombre):
                         break
                     detener_todos_los_canales()
                     reproducir_sonido(anim.cancion_muerte)
-                    estado.motivo_game_over = nombre           
+                    estado.motivo_game_over = nombre
                     estado.stop_event.set()
                 break
-            
-            # Freddy no intenta moverse antes de las 3 AM
+
+            # Freddy no se mueve antes de las 3 AM
             if anim.nombre == "Freddy" and estado.hora_actual < 5:
                 continue
 
-            # IA decide si mueve
+            # Decisión de movimiento basada en IA
             if random.randint(1, 20) <= anim.ia_level:
-                anim.mover()                   
+                anim.mover()
 
 
 def detener_todos_los_canales():
-
     """
-        Detiene todos los sonidos en los canales de pasos e interfaz.
+    Detiene todos los sonidos en los canales de pasos e interfaz.
     """
-
     estado.canal_pasos_chica.stop()
     estado.canal_pasos_bonnie.stop()
     estado.canal_pasos_foxy.stop()
