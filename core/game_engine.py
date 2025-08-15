@@ -2,7 +2,6 @@ import core.config  as estado
 from core.timers import avanzar_hora
 from core.energy import verificar_energia
 from core.animatronics import animatronics
-from core.movement import mover_animatronico
 from ui.screens import mapa_interactivo, pantalla_game_over, seleccionar_dificultad, intro
 from utils.utils import limpiar_pantalla
 
