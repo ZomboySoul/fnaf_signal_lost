@@ -32,12 +32,12 @@
   <a href="https://github.com/ZomboySoul/fnaf_signal_lost/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml" target="_blank" rel="noopener noreferrer">Report Bug</a>
 </p>
 <p align="center">
-  <a href="docs/README_fr.md">Français</a> ·  
-  <a href="docs/README_cn.md">简体中文</a> ·
-  <a href="docs/README_es.md">Español</a> ·
-  <a href="docs/README_ja.md">日本語</a> ·
-  <a href="docs/README_pt-BR.md">Português Brasileiro</a> ·
-  <a href="docs/README_it.md">Italiano</a>
+  <a href="documents/README_fr.md">Français</a> ·  
+  <a href="documents/README_cn.md">简体中文</a> ·
+  <a href="documents/README_es.md">Español</a> ·
+  <a href="documents/README_ja.md">日本語</a> ·
+  <a href="documents/README_pt-BR.md">Português Brasileiro</a> ·
+  <a href="documents/README_it.md">Italiano</a>
 </p>
 
 <br>
@@ -124,6 +124,8 @@ pip install pygame colorama
 ---
 
 ## 🧑‍💻 Author
+
+📄[View project documentation](https://zomboysoul.github.io/fnaf_signal_lost/)
 
 **Agustín Lezcano - ZomboySoul**
 🔗 [GitHub](https://github.com/ZomboySoul) | 🇦🇷 Argentina

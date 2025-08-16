@@ -127,5 +127,6 @@ pip install pygame colorama
 
 ## 🧑‍💻 autor
 
+📄[Ver a documentação do projeto](https://zomboysoul.github.io/fnaf_signal_lost/)
 **Agustín Lezcano - ZomboySoul**
 🔗 [GitHub](https://github.com/ZomboySoul) | 🇦🇷 Argentina
